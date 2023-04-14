@@ -14,7 +14,7 @@
 These metrics were obtained using
 [Google PageSpeed Insights](https://pagespeed.web.dev/) .
 
-![Project performance on Desktop screens](./assets/performance/performance-desktop.png)
+![Project performance on Desktop screens](./src/assets/performance/performance-desktop.png)
 
 
 
