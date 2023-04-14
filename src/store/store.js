@@ -2,11 +2,10 @@ import axios from 'axios';
 import store from 'store';
 const { makeAutoObservable, runInAction } = require('mobx');
 
-axios.defaults.baseURL = `https://63b72b2d4d97e82aa3b6324d.mockapi.io/api/v1/users`;
+axios.defaults.baseURL = `https://63b72b2d4d97e82aa3b6324d.mockapi.io/api/v1`;
 
 class Store {
    usersDataList = [];
-   userData = {};
    isLoading = false;
    error = '';
    userId = '';
@@ -27,31 +26,11 @@ class Store {
          runInAction(() => {
             this.isLoading = true;
          });
-         const { data } = await axios.get();
+         const response = await axios.get('/users');
+         const { data } = response;
          runInAction(() => {
             this.usersDataList = data.map((el) => ({ ...el, isFollow: false }));
             store.set('usersDataList', this.usersDataList);
-         });
-      } catch (e) {
-         runInAction(() => {
-            this.error = e.message;
-         });
-      } finally {
-         runInAction(() => {
-            this.isLoading = false;
-         });
-      }
-   }
-
-   async fetchOneUser(id) {
-      try {
-         runInAction(() => {
-            this.isLoading = true;
-         });
-         const { data } = await axios.get(id);
-         runInAction(() => {
-            const { item } = this.findUserById(id);
-            this.userData = { ...item, ...data };
          });
       } catch (e) {
          runInAction(() => {
@@ -89,24 +68,29 @@ class Store {
    }
 
    setFilter(value) {
+      const usersDataList = store.get('usersDataList');
       switch (value) {
          case 'all':
-            this.usersDataList.sort((a, b) => +a.id - +b.id);
+            this.usersDataList = usersDataList;
             break;
          case 'name':
-            this.usersDataList.sort((a, b) => a.user.localeCompare(b.user));
+            this.usersDataList = [
+               ...usersDataList.sort((a, b) => a.user.localeCompare(b.user)),
+            ];
             break;
          case 'tweets':
-            this.usersDataList.sort((a, b) => a.tweets - b.tweets);
+            this.usersDataList = [...usersDataList.sort((a, b) => a.tweets - b.tweets)];
             break;
          case 'followers':
-            this.usersDataList.sort((a, b) => a.followers - b.followers);
+            this.usersDataList = [
+               ...usersDataList.sort((a, b) => a.followers - b.followers),
+            ];
             break;
          case 'follow':
-            this.usersDataList.sort((a, b) => a.isFollow - b.isFollow);
+            this.usersDataList = [...usersDataList.filter((el) => el.isFollow === false)];
             break;
          case 'followings':
-            this.usersDataList.sort((a, b) => b.isFollow - a.isFollow);
+            this.usersDataList = [...usersDataList.filter((el) => el.isFollow === true)];
             break;
          default:
             throw new Error('Error selector');

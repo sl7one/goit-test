@@ -217,6 +217,16 @@ export const ListBody = styled.ul`
 export const UserPage = styled.div`
    ${Container} {
       flex-direction: column;
+      padding: 40px;
+
+      ul {
+         display: flex;
+         align-items: space-between;
+         justify-content: center;
+         flex-wrap: wrap;
+         gap: 15px;
+      }
+
       a {
          padding: 20px;
          background-color: #5cd3a8;
@@ -245,5 +255,45 @@ export const SortBarPanelBox = styled.div`
 
    .Dropdown-root {
       width: 85%;
+   }
+`;
+
+export const NavigationBox = styled.div`
+   a {
+      position: fixed;
+      bottom: 5%;
+      right: 5%;
+      padding: 14px 28px;
+      font-weight: 600;
+      font-size: 18px;
+      text-transform: uppercase;
+      color: #373737;
+      background-color: #5cd3a8;
+      box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+      border-radius: 10.3108px;
+
+      transition: all 350ms ease-in-out;
+
+      &: hover {
+         transform: scale(1.1);
+      }
+   }
+`;
+
+export const LoadMoreBtn = styled.button`
+   margin: 30px;
+   padding: 14px 28px;
+   font-weight: 600;
+   font-size: 18px;
+   text-transform: uppercase;
+   color: #373737;
+   background-color: orange;
+   box-shadow: 0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25);
+   border-radius: 10.3108px;
+
+   transition: all 350ms ease-in-out;
+
+   &: hover {
+      transform: scale(1.1);
    }
 `;

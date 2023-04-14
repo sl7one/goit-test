@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { usersStore } from 'store/store';
 import { ListBody, ListHeader } from 'styles/styled';
 import { observer } from 'mobx-react-lite';
@@ -20,7 +19,6 @@ export const UsersList = observer(() => {
             <p>Tweets</p>
             <p>Followers</p>
             <p>Followed</p>
-            <p>Details</p>
          </ListHeader>
          <SortBarPanel />
          {isLoading ? (
@@ -47,8 +45,6 @@ export const UsersList = observer(() => {
                            onChange={() => setIsFollow(id, isFollow)}
                         />
                      </div>
-
-                     <Link to={`/goit-test/${id}`}>Details...</Link>
                   </li>
                ))}
             </ListBody>

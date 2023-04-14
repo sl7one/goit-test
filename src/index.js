@@ -6,7 +6,7 @@ import './styles/index.css';
 import { App } from './pages/App';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from 'pages/ErrorPage';
-import { User } from 'pages/User';
+import { UsersTweets } from 'pages/UsersTweets';
 
 const publicRouter = createBrowserRouter([
    {
@@ -14,7 +14,7 @@ const publicRouter = createBrowserRouter([
       element: <App />,
       errorElement: <ErrorPage />,
    },
-   { path: '/goit-test/:userId', element: <User /> },
+   { path: '/tweets', element: <UsersTweets /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
