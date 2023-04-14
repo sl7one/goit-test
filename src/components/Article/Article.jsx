@@ -9,6 +9,7 @@ import {
 import logoGoit from '../../assets/img/logo-goit.svg';
 import { usersStore } from 'store/store';
 import { observer } from 'mobx-react-lite';
+import { NumericFormat } from 'react-number-format';
 
 export const Article = observer(({ item }) => {
    const { setIsFollow } = usersStore;
@@ -39,15 +40,22 @@ export const Article = observer(({ item }) => {
          </MiddleLine>
          <BottomBox>
             <p>
-               <span>{tweets}</span> <span>TWEETS</span>
+               <span>{tweets}</span>
+               <span>TWEETS</span>
             </p>
             <p>
-               <span>{followers}</span> <span>FOLLOWERS</span>
+               <NumericFormat
+                  displayType="text"
+                  value={followers}
+                  thousandsGroupStyle="thousand"
+                  thousandSeparator=","
+                  renderText={(value) => <span>{value}</span>}
+               />
+               <span>FOLLOWERS</span>
             </p>
             <FollowBtn
                type="button"
                onClick={() => setIsFollow(id, isFollow)}
-               // disabled={isLoading}
                isFollow={isFollow}
             >
                {isFollow ? 'Followed' : 'Follow'}

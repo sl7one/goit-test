@@ -128,6 +128,18 @@ export const BottomBox = styled.div`
       text-transform: uppercase;
 
       color: #ebd8ff;
+
+      input {
+         max-width: 80px;
+         color: inherit;
+      }
+
+      span {
+         &:last-of-type {
+            margin-left: 10px;
+         }
+      }
+
       &:last-of-type {
          margin-top: 16px;
       }
